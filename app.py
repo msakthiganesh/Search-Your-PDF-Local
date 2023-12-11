@@ -7,12 +7,11 @@ from langchain.vectorstores import Chroma
 from langchain.llms import HuggingFacePipeline
 from langchain.chains import RetrievalQA
 from constants import CHROMA_SETTINGS
+from envs import SENTENCE_TRANSFORMER_MODEL_DIR, LLM_MODEL_DIR
 
-MODEL_DIR = '/Users/sakthi/Documents/PyProjects/opensource_pdf_search/models/LaMini-Flan-T5-783M'
-SENTENCE_TRANSFORMER_MODEL = 'all-MiniLM-L6-v2'
-tokenizer = AutoTokenizer.from_pretrained(MODEL_DIR)
+tokenizer = AutoTokenizer.from_pretrained(LLM_MODEL_DIR)
 model = AutoModelForSeq2SeqLM.from_pretrained(
-    MODEL_DIR,
+    LLM_MODEL_DIR,
     # device_map='cpu',
     torch_dtype=torch.float32
 )
@@ -36,7 +35,7 @@ def llm_pipeline():
 # @st.cache_resource
 def qa_llm():
     llm = llm_pipeline()
-    embeddings = SentenceTransformerEmbeddings(model_name=SENTENCE_TRANSFORMER_MODEL)
+    embeddings = SentenceTransformerEmbeddings(model_name=SENTENCE_TRANSFORMER_MODEL_DIR)
     db = Chroma(persist_directory="db", embedding_function=embeddings, client_settings=CHROMA_SETTINGS)
     retriever = db.as_retriever()
     qa = RetrievalQA.from_chain_type(

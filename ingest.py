@@ -4,10 +4,11 @@ from langchain.embeddings import SentenceTransformerEmbeddings
 from langchain.vectorstores import Chroma
 import os
 from constants import CHROMA_SETTINGS
+from envs import SENTENCE_TRANSFORMER_MODEL_DIR
 
 PERSIST_DIR = "db"
-# SENTENCE_TRANSFORMER_MODEL = 'all-MiniLM-L6-v2'
-SENTENCE_TRANSFORMER_MODEL_DIR = '/Users/sakthi/Documents/PyProjects/opensource_pdf_search/models/sentence-transformers_all-MiniLM-L6-v2/'
+# SENTENCE_TRANSFORMER_MODEL = '<MODEL_NAME>'
+# SENTENCE_TRANSFORMER_MODEL_DIR = '<MODEL_DIR>'  # Currently fetched from envs file
 
 
 def main():

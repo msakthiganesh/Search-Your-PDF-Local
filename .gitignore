@@ -2,3 +2,5 @@
 /db/
 /models/
 /docs/
+envs.py
+/.idea
